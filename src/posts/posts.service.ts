@@ -1,11 +1,12 @@
 import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 
 import { HttpService } from "src/shared/services/http";
 
 @Injectable()
 export class PostsService {
-    constructor( private readonly http: HttpService){
-        this.http._baseUrl = 'https://dummyjson.com/';
+    constructor( private readonly http: HttpService, private readonly configService: ConfigService){
+        this.http._baseUrl = this.configService.get('POST_SERVICE_URL');
     }
 
     getPosts(limit?: number, skip?: number, filters?: any) {

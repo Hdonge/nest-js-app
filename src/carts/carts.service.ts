@@ -6,7 +6,7 @@ import { HttpService } from 'src/shared/services/http';
 @Injectable()
 export class CartsService {
     constructor(private readonly http: HttpService, private readonly configService: ConfigService) {
-        this.http._baseUrl = 'https://dummyjson.com/';
+        this.http._baseUrl = this.configService.get('CART_SERVICE_URL');
     }
 
     getCarts(limit?: number, skip?: number, filters?: any) {

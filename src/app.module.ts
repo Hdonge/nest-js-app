@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `${process.env.NODE_ENV}.env`
+      envFilePath: `src/config/.${process.env.NODE_ENV}.env`
     }),
     ProductModule,
     AuthModule,
