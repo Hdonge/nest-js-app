@@ -9,9 +9,10 @@ import { CartsModule } from './carts/carts.module';
 import { PostsController } from './posts/posts.controller';
 import { PostsModule } from './posts/posts.module';
 import { ProductModule } from './product/product.module';
-import { AuthMiddleware } from './shared/middlewares/auth';
+import { AuthMiddleware } from './shared/middlewares/authentication';
 import { LoggerMiddleware } from './shared/middlewares/logger';
 import { SharedModule } from './shared/shared.module';
+import { ValidUserController } from './validUser.controller';
 
 @Module({
   imports: [
@@ -25,13 +26,13 @@ import { SharedModule } from './shared/shared.module';
     CartsModule,
     PostsModule
   ],
-  controllers: [AppController],
+  controllers: [AppController, ValidUserController],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer){
       consumer
       .apply(LoggerMiddleware).forRoutes(CartsController, PostsController)
-      .apply(AuthMiddleware).forRoutes(AppController);
+      .apply(AuthMiddleware).forRoutes(AppController, ValidUserController);
   }
 }
