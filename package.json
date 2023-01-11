@@ -29,6 +29,7 @@
     "@types/cookie-parser": "^1.4.3",
     "axios": "^1.2.2",
     "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
     "encrypt-password": "^1.0.1",
     "encrypt-with-password": "^1.0.0",
     "reflect-metadata": "^0.1.13",
