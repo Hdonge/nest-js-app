@@ -1,20 +1,18 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from "@nestjs/common";
 import { Request, Response } from "express";
 import * as crypto from "crypto";
-import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
+import { CacheService } from "../services/cache";
 
 @Injectable()
 export class CacheInterceptor implements NestInterceptor {
-    constructor() { }
-    private cache = new Map<string, any>();
+    constructor(private readonly cache: CacheService) {}
 
-    intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    async intercept(context: ExecutionContext, next: CallHandler): Promise<any> {
         const request: Request = context.switchToHttp().getRequest();
         const response: Response = context.switchToHttp().getResponse();
         const key = this.getCacheKey(request);
-        const cachedResponse = this.cache.get(key);
-
+        const cachedResponse = await this.cache.get(key);
         if (cachedResponse) {
             response.setHeader('X-Cache', 'Cache Hit');
             return cachedResponse;

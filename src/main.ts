@@ -9,7 +9,6 @@ async function bootstrap() {
     bufferLogs: true // false: framework will use default logger, true: will use custom logger for appstart logs too.
   });
 
-  console.log(process.env);
   const logger = new Logger();
   logger.mainContext = "NestAppStart";
   app.useLogger(logger);
