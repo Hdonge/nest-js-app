@@ -1,7 +1,9 @@
-import { Controller, Get, Head, Header, Query, Redirect } from '@nestjs/common';
+import { Controller, Get, Head, Header, Query, Redirect, Version } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller({
+  version: '1'
+})
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
@@ -11,6 +13,7 @@ export class AppController {
   }
 
   @Get('docs')
+  @Version('2')
   @Redirect('https://docs.nestjs.com', 301)
   @Header('cache-control', 'none')
   getDocs(@Query('version') version) {

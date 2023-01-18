@@ -10,7 +10,6 @@ export class AuthMiddleware implements NestMiddleware {
         }
 
         const token = authHeader.split(' ')[1];
-
         try {
             //For now just checking if autheader is present or not in request or not for authentication of request. 
             //But here more logic can be added verifying tokens with JWT or any other authentication techniques.
