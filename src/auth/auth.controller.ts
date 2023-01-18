@@ -2,6 +2,7 @@ import { Body, Controller, Head, HttpCode, HttpStatus, Post, Put, Req, Res } fro
 import { Request, Response } from "express";
 
 import { AuthService } from "./auth.service";
+import { registerUserDto } from "./dtos/register-user.dto";
 
 @Controller('auth')
 export class AuthController {
@@ -9,10 +10,9 @@ export class AuthController {
 
     @Post('register')
     register(
-        @Body('username') username: string,
-        @Body('password') password: string
+        @Body() registerUserDto: registerUserDto
     ) {
-        return this.authService.registerUser(username, password);
+        return this.authService.registerUser(registerUserDto.username, registerUserDto.password);
     }
 
     @Post('login')
