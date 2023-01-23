@@ -1,5 +1,7 @@
 import { HttpModule } from "@nestjs/axios";
+import { BullModule } from "@nestjs/bull";
 import { CacheModule, Module } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { ScheduleModule } from "@nestjs/schedule";
 
 import { CacheService } from "./services/cache";
@@ -20,7 +22,19 @@ import { TasksService } from "./services/scheduler-crons/tasks";
             max: 5,
             isGlobal: true
         }),
-        ScheduleModule.forRoot()
+        ScheduleModule.forRoot(),
+        BullModule.forRootAsync({
+           useFactory: async (configService: ConfigService) => ({
+            redis: {
+                host: configService.get('BULL_REDIS_HOST'),
+                port: configService.get('BULL_REDIS_PORT')
+            }
+           }),
+           inject: [ConfigService]
+        }),
+        BullModule.registerQueue({
+            name: 'file-upload-message-queue'
+        })
     ],
     providers: [HttpClientBase, HttpService, Logger, CacheService, TasksService, NotificationService],
     exports: [HttpService, Logger, CacheService]
