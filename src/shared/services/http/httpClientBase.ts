@@ -16,15 +16,24 @@ export class HttpClientBase implements OnModuleInit {
 
     async buildRequest(config): Promise<AxiosResponse> {
         this.httpService.axiosRef.defaults.headers.common['Authorization'] = this.token ? `Bearer ${this.token}` : null;
+        this.httpService.axiosRef.defaults.headers.common['Accept-Encoding'] = 'gzip,deflate,compress';
+
         return this.httpService.axiosRef(config)
-            .then(response => response.data);
+            .then(response => response.data)
+            .catch((error) => {
+                this.logger.error(error.message, error.stack, 'buildRequest');
+                return Promise.reject(error)
+            });
     }
 
     private async fetchToken() {
         this.token = await this.httpService.axiosRef({
             url: 'https://dummyjson.com/auth/login',
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip,deflate,compress'
+            },
             data: ({
                 username: 'kminchelle',
                 password: '0lelplR',

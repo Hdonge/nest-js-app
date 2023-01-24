@@ -17,14 +17,14 @@ export class NotificationService {
         this.logger.debug('Notifications are triggered', 'triggerNotifications');
     }
 
-    @Cron(CronExpression.EVERY_5_SECONDS, {
+    @Cron(CronExpression.EVERY_10_MINUTES, {
         name: 'notificationWithInterval'
     })
     triggerNotificationWithInterval() {
-        this.logger.debug('Notifications are triggered with interval of five seconds', 'triggerNotificationWithInterval');
+        this.logger.debug('Notifications are triggered with interval of ten minutes', 'triggerNotificationWithInterval');
     }
 
-    @Timeout(20000)
+    @Timeout(200000)
     stopNotificationWithInterval() {
         const job = this.schedulerRegistry.getCronJob('notificationWithInterval');
         job.stop();
