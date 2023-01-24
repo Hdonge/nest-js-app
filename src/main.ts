@@ -24,8 +24,9 @@ async function bootstrap() {
 
   process.on('unhandledRejection', (error: Error) => {
     logger.error(error, error.stack, 'unhandledRejection');
-});
+  });
 
   await app.listen(3000);
+  logger.log(`App is running on: ${await app.getUrl()}`, 'bootstrap');
 }
 bootstrap();

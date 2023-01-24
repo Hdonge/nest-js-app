@@ -1,11 +1,13 @@
 import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from "@nestjs/config";
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CartsController } from './carts/carts.controller';
 import { CartsModule } from './carts/carts.module';
+import { OrdersModule } from './orders/orders.module';
 import { PostsController } from './posts/posts.controller';
 import { PostsModule } from './posts/posts.module';
 import { ProductModule } from './product/product.module';
@@ -20,11 +22,13 @@ import { ValidUserController } from './validUser.controller';
       isGlobal: true,
       envFilePath: `src/config/.${process.env.NODE_ENV}.env`
     }),
+    EventEmitterModule.forRoot(),
     ProductModule,
     AuthModule,
     SharedModule,
     CartsModule,
-    PostsModule
+    PostsModule,
+    OrdersModule
   ],
   controllers: [AppController, ValidUserController],
   providers: [AppService],
