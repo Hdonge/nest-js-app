@@ -11,6 +11,7 @@ import { OrdersModule } from './orders/orders.module';
 import { PostsController } from './posts/posts.controller';
 import { PostsModule } from './posts/posts.module';
 import { ProductModule } from './product/product.module';
+import { ServerSideEventsController } from './server-events.controller';
 import { AuthMiddleware } from './shared/middlewares/authentication';
 import { LoggerMiddleware } from './shared/middlewares/logger';
 import { SharedModule } from './shared/shared.module';
@@ -30,7 +31,7 @@ import { ValidUserController } from './validUser.controller';
     PostsModule,
     OrdersModule
   ],
-  controllers: [AppController, ValidUserController],
+  controllers: [AppController, ValidUserController, ServerSideEventsController],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
