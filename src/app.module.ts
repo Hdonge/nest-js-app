@@ -1,6 +1,7 @@
 import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from "@nestjs/config";
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ThrottlerModule } from "@nestjs/throttler";
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -24,6 +25,10 @@ import { ValidUserController } from './validUser.controller';
       envFilePath: `src/config/.${process.env.NODE_ENV}.env`
     }),
     EventEmitterModule.forRoot(),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10
+    }),
     ProductModule,
     AuthModule,
     SharedModule,
