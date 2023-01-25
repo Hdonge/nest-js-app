@@ -17,6 +17,7 @@ import { AuthMiddleware } from './shared/middlewares/authentication';
 import { LoggerMiddleware } from './shared/middlewares/logger';
 import { SharedModule } from './shared/shared.module';
 import { ValidUserController } from './validUser.controller';
+import { VideosModule } from './videos/videos.module';
 
 @Module({
   imports: [
@@ -34,7 +35,8 @@ import { ValidUserController } from './validUser.controller';
     SharedModule,
     CartsModule,
     PostsModule,
-    OrdersModule
+    OrdersModule,
+    VideosModule
   ],
   controllers: [AppController, ValidUserController, ServerSideEventsController],
   providers: [AppService],

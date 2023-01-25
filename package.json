@@ -44,6 +44,7 @@
     "helmet": "^6.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
+    "stream-transcoder": "0.0.5",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
