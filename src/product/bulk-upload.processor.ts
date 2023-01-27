@@ -3,7 +3,6 @@ import { Job } from "bull";
 
 @Processor('file-upload-message-queue')
 export class BulkProductsCsvProcessor {
-    constructor(private readonly lo) { }
 
     @Process('csv')
     async handleBulkCsvFile(job: Job) {
@@ -13,5 +12,4 @@ export class BulkProductsCsvProcessor {
         console.log(productsArray);
         //Bulk product create service from here.
     }
-
 }

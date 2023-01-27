@@ -6,6 +6,7 @@ import { BulkProductsController } from './bulk-products.controller';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 import { MulterModule } from '@nestjs/platform-express';
+import { BulkProductsCsvProcessor } from './bulk-upload.processor';
 
 @Module({
   imports: [
@@ -24,6 +25,6 @@ import { MulterModule } from '@nestjs/platform-express';
     MulterModule.register()
   ],
   controllers: [ProductController, BulkProductsController],
-  providers: [ProductService]
+  providers: [ProductService, BulkProductsCsvProcessor]
 })
 export class ProductModule { }

@@ -3,7 +3,6 @@ import { InjectQueue } from "@nestjs/bull";
 import { Queue } from "bull";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
-import { extname } from "path";
 
 @Controller('bulk-product')
 export class BulkProductsController {
@@ -14,8 +13,7 @@ export class BulkProductsController {
         storage: diskStorage({
             destination: './csv',
             filename: (req, file, cb) => {
-                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 2)));
-                cb(null, `${randomName}${extname(file.originalname)}`);
+                cb(null, file.originalname);
             }
         })
     }))
