@@ -11,17 +11,17 @@ export class TasksService {
 
     @Cron('45 * * * * *')
     handleCronWithExpression() {
-        this.logger.debug('Called when the current second is 45');
+        this.logger.debug('Called when the current second is 45', 'handleCronWithExpression');
     }
 
-    @Cron(CronExpression.EVERY_10_SECONDS)
+    @Cron(CronExpression.EVERY_10_MINUTES)
     handleCron() {
-        this.logger.log('Called at every 10 seconds', 'handlCron');
+        this.logger.log('Called at every 10 Minutes', 'handlCron');
     }
 
-    @Interval('notifications', 2500)
+    @Interval('notifications', 250000)
     handleInterval() {
-        this.logger.log('Called at every 2.5 seconds', 'handleInterval');
+        this.logger.log('Called at every 250 seconds', 'handleInterval');
     }
 
     @Timeout(5000)
