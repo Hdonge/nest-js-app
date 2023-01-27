@@ -13,12 +13,15 @@
     <script type="text/javascript">
         //Connect with localhost:3000/api/event
         const eventSource = new EventSource('http://localhost:3000/api/sse/event');
-        eventSource.onmessage = ({data}) => {
+        eventSource.onmessage = ({ data }) => {
             const message = document.createElement('li');
             message.innerText = data;
             document.body.appendChild(message);
         }
     </script>
+    <video id="videoPlayer" controls muted="muted" autoplay>
+        <source src="http://localhost:3000/api/videos/yoga" type="video/mp4">
+    </video>
 </body>
 
 </html>

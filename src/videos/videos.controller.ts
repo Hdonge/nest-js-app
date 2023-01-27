@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Param, Res, StreamableFile } from "@nestjs/common";
+import { Controller, Get, Header, Param, Res, Headers } from "@nestjs/common";
 import { Response } from "express";
 
 import { VideosService } from "./videos.service";
@@ -8,12 +8,11 @@ export class VideosController {
     constructor(private readonly videosService: VideosService) { }
 
     @Get(':name')
-    @Header('content-type', 'video/mp4')
+    @Header('Content-Type', 'video/mp4')
     async getVideo(
         @Param('name') name: string,
         @Res() res: Response
     ) {
-        const file = this.videosService.getVideoFileStream(name);
-        file.pipe(res);
+        this.videosService.getVideoFileStream(name).pipe(res);
     }
 }
